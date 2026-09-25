@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>#CaffieNation — The Second Uprising</title>
+  <meta name="description" content="The movement went quiet. It did not die. #CaffieNation — the office campaign for a proper bean-to-cup coffee machine.">
+  <meta name="theme-color" content="#0b0a09">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="#CAFFIENATION — The Second Uprising Has Begun">
+  <meta property="og:description" content="The movement went quiet. It did not die.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0a09'/%3E%3Cellipse cx='32' cy='32' rx='17' ry='24' fill='%238a6242' transform='rotate(24 32 32)'/%3E%3Cpath d='M24 14c10 8 -2 24 12 36' stroke='%230b0a09' stroke-width='4' fill='none'/%3E%3C/svg%3E">
+
+  <link rel="preload" href="fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/ibm-plex-mono-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script>
+    /* Decide before first paint whether the opening transmission plays.
+       It plays once, then not again for 12 hours (or add ?intro to force it). */
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var force = /[?&]intro\b/.test(location.search);
+      var seen = 0;
+      try { seen = +localStorage.getItem('cfn:intro') || 0; } catch (e) {}
+      if (force || (!reduce && Date.now() - seen > 432e5)) d.classList.add('intro-on');
+      // Failsafe: never leave the overlay up if the main script fails.
+      setTimeout(function () { if (!window.__cfnReady) d.classList.remove('intro-on'); }, 4000);
+    })();
+  </script>
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ OPENING TRANSMISSION ============ -->
+  <div class="intro" id="intro">
+    <canvas class="intro__static" aria-hidden="true"></canvas>
+    <div class="intro__osd" aria-hidden="true">
+      <span>CH 07</span>
+      <span>AV-1 // PAL</span>
+    </div>
+    <div class="intro__nosignal"><span>NO SIGNAL</span></div>
+    <div class="intro__log">
+      <p class="intro__line"><span class="sig">SIGNAL DETECTED</span></p>
+      <p class="intro__line"><span class="sig">SOURCE: UNKNOWN</span></p>
+      <p class="intro__line"><span class="sig">INTERCEPTING TRANSMISSION</span><span class="intro__dots" aria-hidden="true"></span></p>
+    </div>
+    <button class="intro__skip" type="button">SKIP <span aria-hidden="true">›</span></button>
+  </div>
+
+  <!-- ============ CRT LAYERS ============ -->
+  <div class="crt" aria-hidden="true">
+    <div class="crt__grain"></div>
+    <div class="crt__scan"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+  </div>
+  <div class="tear" aria-hidden="true"></div>
+  <div class="stamp-flash" aria-hidden="true"><span></span></div>
+
+  <!-- ============ HUD / NAVIGATION ============ -->
+  <header class="hud">
+    <a class="hud__brand" href="#top" aria-label="#CaffieNation — back to top">
+      <span class="hud__mark">#CFN</span>
+      <span class="hud__ch">CH 07</span>
+    </a>
+
+    <nav class="hud__nav" id="site-nav" aria-label="Sections">
+      <ol>
+        <li><a href="#manifesto"><span class="n">01</span>Manifesto</a></li>
+        <li><a href="#demands"><span class="n">02</span>Demands</a></li>
+        <li><a href="#situation-room"><span class="n">03</span>Situation room</a></li>
+        <li><a href="#intelligence"><span class="n">04</span>Intelligence</a></li>
+        <li><a href="#timeline"><span class="n">05</span>Timeline</a></li>
+        <li><a href="#transmissions"><span class="n">06</span>Transmissions</a></li>
+      </ol>
+      <p class="hud__navfoot">THE BEANS WILL RISE</p>
+    </nav>
+
+    <p class="hud__status">
+      <span class="rec" aria-hidden="true"></span>TRANSMISSION ACTIVE
+      <span class="sep">//</span> SIGNAL STRENGTH: <b data-signal>87%</b>
+    </p>
+
+    <button class="hud__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="hud__toggle-open">MENU</span><span class="hud__toggle-close">CLOSE</span>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__osd hero__osd--tl" aria-hidden="true">
+        <span class="osd-play">PLAY ►</span> SP<br>
+        <span data-timecode>00:00:00:00</span>
+      </div>
+      <div class="hero__osd hero__osd--tr">
+        DOCUMENT CFN-002<br>
+        EST. FIRST UPRISING // 2025
+      </div>
+
+      <svg class="hero__emblem" viewBox="0 0 400 400" aria-hidden="true">
+        <defs>
+          <path id="ring" d="M200,200 m-158,0 a158,158 0 1,1 316,0 a158,158 0 1,1 -316,0"/>
+        </defs>
+        <circle cx="200" cy="200" r="186" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="200" cy="200" r="132" fill="none" stroke="currentColor" stroke-width="2"/>
+        <text font-size="21" letter-spacing="5" fill="currentColor"><textPath href="#ring">THE BEANS WILL RISE ✶ NO INSTANT COFFEE ✶ #CAFFIENATION ✶ EST. 2025 ✶</textPath></text>
+        <g transform="rotate(28 200 200)">
+          <ellipse cx="200" cy="200" rx="70" ry="100" fill="currentColor"/>
+          <path d="M186,104 C236,150 160,220 212,296" stroke="var(--bg)" stroke-width="12" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <div class="hero__body wrap">
+        <p class="kicker">// Intercepted broadcast — source unknown</p>
+        <h1 class="hero__title sig" id="hero-title" data-sig><span class="hash">#</span>CAFFIENATION</h1>
+        <p class="hero__sub sig" data-sig>THE SECOND UPRISING HAS BEGUN.</p>
+        <p class="hero__lede">The movement went quiet. It did not die.</p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="#manifesto">ENTER THE UNDERGROUND <span aria-hidden="true">→</span></a>
+          <a class="btn" href="#situation-room">ENTER SITUATION ROOM <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="hero__osd hero__osd--bl">LAT ██.████° N // LON █.████° W</div>
+      <div class="hero__osd hero__osd--br">SIGNAL STRENGTH: <span data-signal>87%</span></div>
+    </section>
+
+    <!-- ============ 01 — THE MANIFESTO ============ -->
+    <section class="section" id="manifesto" aria-labelledby="h-manifesto">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/01</span><span>CLASSIFICATION: CAFFEINATED</span></p>
+          <h2 class="section__title sig" id="h-manifesto" data-sig><span class="num">01 —</span> THE MANIFESTO</h2>
+        </header>
+
+        <div class="manifesto">
+          <article class="paper reveal">
+            <div class="paper__head">
+              <span>DOCUMENT CFN-002</span>
+              <span>PAGE 1 OF 1</span>
+            </div>
+            <span class="stamp stamp--paper" aria-hidden="true">COMMITTEE EYES ONLY</span>
+
+            <p class="paper__lead">Nearly a year ago, a small cell of coffee connoisseurs dared to imagine a better office.</p>
+
+            <ul class="paper__creed">
+              <li>Fresh beans.</li>
+              <li>Fresh milk.</li>
+              <li>Proper coffee.</li>
+              <li>No compromise.</li>
+            </ul>
+
+            <p>They drafted demands. They held meetings. They spoke of grinders in hushed tones.</p>
+            <p>Then the first uprising fell silent.</p>
+            <p>Some founding members have since left the building
+              (<span class="redact redact--peek" tabindex="0" title="Names withheld">names withheld at their request</span>).
+              Their struggle will not be forgotten. Their mugs remain in the cupboard.</p>
+            <p class="paper__now">Now: <strong>#CaffieNation rises again.</strong></p>
+
+            <p class="paper__sig">— THE COMMITTEE<br><span>EST. FIRST UPRISING // 2025</span></p>
+            <p class="paper__note" aria-hidden="true">bring biscuits</p>
+          </article>
+
+          <aside class="log reveal" aria-label="Incident log">
+            <p class="label">INCIDENT LOG</p>
+            <ol class="log__list">
+              <li><time>2025</time><span>First uprising. Demands drafted. Morale high.</span></li>
+              <li><time>2025</time><span>Signal lost. Movement goes underground.</span></li>
+              <li><time>2025–26</time><span>Founding members depart. <span class="redact">Several</span> mugs orphaned.</span></li>
+              <li class="is-now"><time>SEP 2026</time><span>Signal reacquired. Committee reconvenes.</span></li>
+            </ol>
+            <p class="log__foot">The movement went quiet.<br>It did not die.</p>
+            <a class="btn btn--small" href="#demands">OPEN INTELLIGENCE <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 — OUR DEMANDS ============ -->
+    <section class="section section--demands" id="demands" aria-labelledby="h-demands">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/02</span><span>STATUS: NON-NEGOTIABLE</span></p>
+          <h2 class="section__title sig" id="h-demands" data-sig><span class="num">02 —</span> OUR DEMANDS</h2>
+          <p class="section__intro">Six objectives. Issued once. Not withdrawn.</p>
+        </header>
+
+        <ol class="demands">
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 01</span><span class="chip chip--red">NON-NEGOTIABLE</span></div>
+            <span class="objective__icon" aria-hidden="true">☕</span>
+            <h3 class="objective__title">Proper bean-to-cup coffee</h3>
+            <p>Whole beans, ground per cup, brewed on demand. No jars. No sachets. No pods.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 02</span><span class="chip chip--red">NON-NEGOTIABLE</span></div>
+            <span class="objective__icon" aria-hidden="true">🥛</span>
+            <h3 class="objective__title">Fresh milk</h3>
+            <p>Real milk, properly steamed. Powder is not milk. Powder is a surrender.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 03</span><span class="chip">CRITICAL</span></div>
+            <span class="objective__icon" aria-hidden="true">⚡</span>
+            <h3 class="objective__title">Fast service during peak periods</h3>
+            <p>Nobody queues fifteen minutes at 09:00. The machine serves the people, not the reverse.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 04</span><span class="chip">CRITICAL</span></div>
+            <span class="objective__icon" aria-hidden="true">👥</span>
+            <h3 class="objective__title">Enough capacity for the office</h3>
+            <p>Sized for the busiest day, not the average one. With headroom.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 05</span><span class="chip">CRITICAL</span></div>
+            <span class="objective__icon" aria-hidden="true">🔧</span>
+            <h3 class="objective__title">Reliable maintenance</h3>
+            <p>A named owner for cleaning. A written response time for breakdowns. No heroics.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+          <li class="objective panel reveal">
+            <div class="objective__top"><span class="label">OBJECTIVE 06</span><span class="chip">CRITICAL</span></div>
+            <span class="objective__icon" aria-hidden="true">💷</span>
+            <h3 class="objective__title">Sensible long-term cost</h3>
+            <p>Judged on total cost of ownership and cost per cup. Never on the monthly headline.</p>
+            <p class="objective__cond">CONDITION: <b>UNMET</b></p>
+          </li>
+        </ol>
+
+        <p class="demands__stamp reveal"><span class="stamp stamp--big">NO INSTANT COFFEE</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 03 — THE SITUATION ROOM ============ -->
+    <section class="section section--room" id="situation-room" aria-labelledby="h-room">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/03</span><span>OPERATIONS // LIVE</span></p>
+          <h2 class="section__title sig" id="h-room" data-sig><span class="num">03 —</span> THE SITUATION ROOM</h2>
+          <p class="section__intro">Every decision the committee must make, mapped as a front. Open a branch for field intelligence, the options on the table and the committee's position.</p>
+        </header>
+
+        <div class="board reveal" data-board aria-label="Decision status"></div>
+
+        <div class="fronts" data-fronts></div>
+
+        <!-- Field calculator -->
+        <section class="calc panel reveal" aria-labelledby="h-calc">
+          <header class="calc__head">
+            <div>
+              <p class="label">FIELD CALCULATOR // CFN-FC-1</p>
+              <h3 class="calc__title" id="h-calc">Capacity, queue &amp; cost-per-cup estimate</h3>
+            </div>
+            <p class="calc__warn">ESTIMATES ONLY — REPLACE WITH REAL QUOTES</p>
+          </header>
+          <form class="calc__grid" data-calc onsubmit="return false">
+            <fieldset class="calc__inputs">
+              <legend class="label">INPUTS</legend>
+              <div class="calc__fields" data-calc-fields></div>
+              <button class="btn btn--small" type="reset">RESET TO DEFAULTS</button>
+            </fieldset>
+            <div class="calc__out" aria-live="polite" data-calc-out></div>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ 04 — INTELLIGENCE FILES ============ -->
+    <section class="section" id="intelligence" aria-labelledby="h-intel">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/04</span><span>COMMITTEE EYES ONLY</span></p>
+          <h2 class="section__title sig" id="h-intel" data-sig><span class="num">04 —</span> INTELLIGENCE FILES</h2>
+          <p class="section__intro">Candidate machines and suppliers under surveillance. <span class="specimen">SPECIMEN DATA</span> — archetypes only, until reconnaissance returns real models and quotes.</p>
+        </header>
+
+        <div class="dossiers" data-dossiers></div>
+      </div>
+    </section>
+
+    <!-- ============ 05 — OPERATION TIMELINE ============ -->
+    <section class="section section--timeline" id="timeline" aria-labelledby="h-timeline">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/05</span><span>PLAN REF: OPERATION LIBERATION</span></p>
+          <h2 class="section__title sig" id="h-timeline" data-sig><span class="num">05 —</span> OPERATION TIMELINE</h2>
+        </header>
+
+        <div class="op reveal">
+          <div class="op__bar" data-op-bar aria-hidden="true"></div>
+          <p class="op__progress label" data-op-progress></p>
+        </div>
+
+        <ol class="phases" data-phases></ol>
+      </div>
+    </section>
+
+    <!-- ============ 06 — COMMITTEE TRANSMISSION ============ -->
+    <section class="section section--tx" id="transmissions" aria-labelledby="h-tx">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="section__meta"><span>FILE CFN-002/06</span><span>BROADCAST LOG</span></p>
+          <h2 class="section__title sig" id="h-tx" data-sig><span class="num">06 —</span> COMMITTEE TRANSMISSION</h2>
+        </header>
+
+        <div class="tx">
+          <div class="tx__log" data-transmissions></div>
+          <aside class="tx__side">
+            <div class="briefing panel reveal" data-briefing></div>
+            <div class="enlist panel reveal">
+              <p class="label">ENLISTMENT</p>
+              <p>Have an opinion on milk? Evidence on queues? A supplier contact? The committee wants it on record.</p>
+              <a class="btn btn--solid" data-transmit href="#">TRANSMIT POSITION <span aria-hidden="true">→</span></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HUMAN RIGHT ============ -->
+    <section class="decree" aria-label="Declaration">
+      <div class="wrap reveal">
+        <p class="decree__text">CAFFEINE IS A HUMAN RIGHT<sup>*</sup></p>
+        <p class="decree__small">*Not recognised by any court, parliament, treaty or HR policy. #CaffieNation accepts no liability for jitters, palpitations, overly productive mornings or excessive enthusiasm in meetings. Decaf drinkers are welcome and will not be reported.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>THE BEANS WILL RISE</span><span>NO INSTANT COFFEE</span><span>DOCUMENT CFN-002</span><span>COMMITTEE EYES ONLY</span><span>TRANSMISSION ACTIVE</span><span>SIGNAL STRENGTH: 87%</span>
+        <span>THE BEANS WILL RISE</span><span>NO INSTANT COFFEE</span><span>DOCUMENT CFN-002</span><span>COMMITTEE EYES ONLY</span><span>TRANSMISSION ACTIVE</span><span>SIGNAL STRENGTH: 87%</span>
+      </div>
+    </div>
+    <div class="wrap footer__grid">
+      <div>
+        <p class="footer__brand">#CAFFIENATION</p>
+        <p class="footer__line">EST. FIRST UPRISING // 2025<br>SECOND UPRISING // 2026</p>
+      </div>
+      <div class="footer__links">
+        <a href="#top">RETURN TO SURFACE <span aria-hidden="true">↑</span></a>
+        <button type="button" data-replay>REPLAY TRANSMISSION <span aria-hidden="true">↺</span></button>
+      </div>
+      <p class="footer__end">END OF TRANSMISSION<span class="cursor" aria-hidden="true">_</span></p>
+    </div>
+    <p class="wrap footer__legal">An unofficial office movement. No machines were harmed in the making of this broadcast.</p>
+  </footer>
+
+  <!-- Dossier viewer -->
+  <dialog class="modal" data-modal aria-labelledby="modal-title">
+    <div class="modal__paper" data-modal-body></div>
+  </dialog>
+
+  <!-- Rough-edge filter for stamps and imperfect borders -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+    </filter>
+  </svg>
+</body>
+</html>
