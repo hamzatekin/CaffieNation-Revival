@@ -19,8 +19,14 @@ Then open http://localhost:8080.
 
 ## Deploy
 
-Any static host works. For GitHub Pages: **Settings → Pages → Deploy from a branch**,
-choose the branch and `/ (root)`.
+Hosted on **Cloudflare Pages** via its Git integration (no Wrangler needed):
+
+1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**, pick this repo.
+2. Production branch: `main`.
+3. Framework preset: **None**. Build command: *(leave empty)*. Build output directory: `/`.
+
+Every push to `main` redeploys; other branches get preview URLs. Any other static
+host works too.
 
 ## Updating the content
 
