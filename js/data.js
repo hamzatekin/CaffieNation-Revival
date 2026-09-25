@@ -59,13 +59,13 @@ window.CFN = {
           question: "Which class of machine actually delivers proper coffee at office scale?",
           intel: [
             "Bean-to-cup machines grind whole beans for every drink and make espresso and milk drinks at one touch. This is the movement's stated objective.",
-            "Traditional espresso machines are excellent in trained hands. Nobody here is a trained barista, and nobody will become one before 09:00.",
+            "Traditional espresso machines are excellent in trained hands, but need a separate grinder and someone making every drink. (Candidate CFN-D03.)",
             "Capsule/pod machines are consistent but expensive per cup, generate constant waste and rarely do fresh milk well.",
             "Bulk filter brewers are fast for volume but cannot produce espresso-based drinks."
           ],
           options: [
             { label: "Bean-to-cup, fully automatic", verdict: "PREFERRED" },
-            { label: "Traditional espresso", verdict: "REJECTED" },
+            { label: "Traditional espresso", verdict: "NEEDS A BARISTA" },
             { label: "Capsule / pod", verdict: "REJECTED" },
             { label: "Bulk filter (as a supplement)", verdict: "POSSIBLE" }
           ],
@@ -329,125 +329,190 @@ window.CFN = {
 
   /* ------------------------------------------------------------------------
      04 — INTELLIGENCE FILES
-     Placeholder archetypes until real models and quotes are gathered.
-     To add a real machine: copy an entry, change the values. Optional:
-       image: "img/machine.jpg"   (shown as a surveillance photo)
-     type: "MACHINE" | "SUPPLIER"
-     threat: 1–5 (maintenance complexity / risk)
+     The candidate machines. Figures are manufacturer / retailer claims.
+       type:    "MACHINE" | "SUPPLIER"
+       summary: [label, value] rows shown on the card
+       threat:  1–5 (maintenance complexity / operational risk)
+       specs:   [label, value] rows shown in the full dossier
+       details: { heading: [bullets] } shown in the full dossier
+       source:  { name, url, retrieved }
+       image:   optional path, e.g. "img/avari-b20.jpg"
      ------------------------------------------------------------------------ */
   dossiers: [
     {
       id: "CFN-D01",
       type: "MACHINE",
-      subject: "Candidate A — model TBC",
-      codename: "The Workhorse",
+      subject: "avari B20",
+      codename: "The Steady Hand",
       summary: [
-        ["Capacity", "200–300 cups/day (est.)"],
-        ["Milk system", "Fresh — fridge unit"]
+        ["Supplier", "rijo42"],
+        ["Class", "Bean-to-cup"],
+        ["Capacity", "200 cups/day (maker)"],
+        ["Milk system", "Fresh — 6 L fridge included"],
+        ["Price", "On enquiry (lease, rent or buy)"]
       ],
-      threat: 4,
-      threatNote: "Daily milk clean. May need a dedicated circuit.",
-      intel: "Built for high-traffic offices. Laughs at the 09:00 rush. Demands discipline in return.",
+      threat: 3,
+      threatNote: "Automatic daily clean of about 14–15 minutes. Runs from a standard 13 A supply.",
+      intel: "Fresh-milk bean-to-cup with twin ceramic grinders and a 10.1\" touchscreen. Compact, and it runs from a normal plug. Rated for 200 cups a day, so check that against peak demand.",
       status: "UNDER REVIEW",
+      specs: [
+        ["Rated output", "200 cups/day"],
+        ["Grinders", "2× ceramic"],
+        ["Brew chamber", "21 g"],
+        ["Hoppers", "2× 700 g beans, 2× 800 g powder"],
+        ["Display", "10.1\" HD touchscreen"],
+        ["Drinks", "Espresso, americano, latte, cappuccino, flat white, cortado, mocha, hot chocolate, iced/chilled drinks, hot water"],
+        ["Milk", "Fresh, refrigerated (6 L fridge included), incl. cold milk foam"],
+        ["Cleaning", "Automatic daily cycle, ~14–15 min"],
+        ["Power", "Machine 2,900 W / 13 A; fridge 65 W / 13 A"],
+        ["Machine size", "W320 × H680 × D545 mm, 25 kg"],
+        ["Fridge size", "W240 × H527 × D420 mm, 14 kg"],
+        ["Supplier includes", "Installation & plumbing, training, service, starter package"],
+        ["Optional extras", "Base cabinet, cup warmer, contactless payment, expulsion kit"]
+      ],
       details: {
-        "For": ["Handles peak demand", "Proper fresh-milk drinks", "Usually strong supplier support"],
-        "Against": ["Highest purchase or rental cost", "Needs a serious cleaning routine", "Larger footprint"],
-        "Questions for the supplier": ["Real drinks per hour for a flat white?", "Electrical requirements?", "Response-time SLA?"]
+        "For": [
+          "Fresh milk as standard, fridge included",
+          "13 A supply: no special electrical work expected",
+          "Smallest footprint of the three (~56 cm wide with fridge)",
+          "Installation, plumbing and training included by the supplier"
+        ],
+        "Against": [
+          "200 cups/day ceiling leaves limited headroom for a large office",
+          "Price not published",
+          "Longest daily clean of the two bean-to-cup options (~15 min)"
+        ],
+        "Questions for the supplier": [
+          "Lease, rental and purchase prices, and what each includes?",
+          "Real drinks per hour for a flat white at peak?",
+          "Engineer response time, in writing?",
+          "Are we required to buy rijo42 beans and milk products?",
+          "Plant-milk option?"
+        ]
+      },
+      source: {
+        name: "rijo42",
+        url: "https://www.rijo42.co.uk/coffee-machines/bean-cup-machines/avari-b20",
+        retrieved: "25.09.2026"
       }
     },
     {
       id: "CFN-D02",
       type: "MACHINE",
-      subject: "Candidate B — model TBC",
-      codename: "The Compact",
+      subject: "R42 Touch",
+      codename: "The Flagship",
       summary: [
-        ["Capacity", "80–120 cups/day (est.)"],
-        ["Milk system", "Fresh"]
+        ["Supplier", "rijo42"],
+        ["Class", "Bean-to-cup"],
+        ["Capacity", "207 cups/hour (maker)"],
+        ["Milk system", "Fresh — 6 L fridge; dual fridge optional"],
+        ["Price", "On enquiry (lease, rent or buy)"]
       ],
-      threat: 3,
-      threatNote: "Daily milk clean. Frequent refills.",
-      intel: "Smaller footprint, smaller bill. Likely to buckle under a full office alone. Two may be better than one.",
+      threat: 4,
+      threatNote: "Shortest daily clean (~9 min), but three heavy units and a 3.1 kW draw. Confirm the electrical supply.",
+      intel: "rijo42's most advanced machine. Self-adjusting double grinders, separate coffee and steam boilers, and a double outlet, so it's built for queues. Hot and chilled milk foam. It's also the biggest and probably the most expensive.",
       status: "UNDER REVIEW",
+      specs: [
+        ["Rated output", "207 cups/hour"],
+        ["Outlet", "Automatic double"],
+        ["Grinders", "2× self-adjusting"],
+        ["Boilers", "Separate coffee and steam"],
+        ["Brew chamber", "18 g (stainless steel brewing unit)"],
+        ["Hoppers", "2× 1.3 kg beans; powder module 2× 1.8 L"],
+        ["Display", "10\" HD touchscreen, up to 300 drink selections"],
+        ["Milk", "Fresh, hot and chilled foam; 6 L fridge (dual fridge optional)"],
+        ["Cleaning", "Daily, ~9 min"],
+        ["Power", "3.1 kW single-phase (220–240 V) or 6 kW three-phase; fridge and powder module 0.10 kW each"],
+        ["Machine size", "W300 × H770 × D575 mm, 57 kg"],
+        ["Fridge size", "W300 × H576 × D385 mm, 29 kg"],
+        ["Powder module", "W160 × H770 × D378 mm, 13 kg"],
+        ["Supplier includes", "Installation & plumbing, training, service, starter package"],
+        ["Optional extras", "Under-counter fridge, dual milk fridge, contactless payment, expulsion kit, AutoSteam wand"]
+      ],
       details: {
-        "For": ["Lower cost", "Fits almost anywhere", "Two units give redundancy"],
-        "Against": ["Small hopper and milk capacity", "Queues on busy days if deployed alone"],
-        "Questions for the supplier": ["Discount for two units?", "Refill frequency at 100 drinks/day?"]
+        "For": [
+          "Highest throughput, with a double outlet for peak queues",
+          "Dual milk fridge option: dairy and plant milk without bodging",
+          "Shortest daily clean of the three",
+          "Self-adjusting grinders keep quality consistent without tinkering"
+        ],
+        "Against": [
+          "Largest footprint: ~76 cm wide across machine, fridge and powder module",
+          "Heaviest: ~99 kg in total, so check the counter",
+          "3.1 kW draw: check whether a dedicated circuit is needed",
+          "Price not published; likely the most expensive"
+        ],
+        "Questions for the supplier": [
+          "Lease, rental and purchase prices, and what each includes?",
+          "Electrical requirement for our building: 13 A plug or dedicated circuit?",
+          "Cost of the dual milk fridge?",
+          "Engineer response time, in writing?",
+          "Are we required to buy rijo42 beans and milk products?"
+        ]
+      },
+      source: {
+        name: "rijo42",
+        url: "https://www.rijo42.co.uk/coffee-machines/bean-cup-machines/r42-touch",
+        retrieved: "25.09.2026"
       }
     },
     {
       id: "CFN-D03",
       type: "MACHINE",
-      subject: "Candidate C — model TBC",
-      codename: "The Compromise",
+      subject: "Fracino 2-Group",
+      codename: "The Old Guard",
       summary: [
-        ["Capacity", "150–250 cups/day (est.)"],
-        ["Milk system", "Powdered"]
-      ],
-      threat: 2,
-      threatNote: "Low. Which is rather the point.",
-      intel: "Easy upkeep. No fridge. No daily milk clean. Tastes suspiciously like the status quo.",
-      status: "UNDER REVIEW — FLAGGED",
-      details: {
-        "For": ["Minimal cleaning", "No milk logistics", "Lower running cost"],
-        "Against": ["Powdered milk", "Powdered milk", "Powdered milk"],
-        "Questions for the supplier": ["Can it be converted to fresh milk later?"]
-      }
-    },
-    {
-      id: "CFN-D04",
-      type: "MACHINE",
-      subject: "Candidate D — model TBC",
-      codename: "The Dual Line",
-      summary: [
-        ["Capacity", "150–200 cups/day (est.)"],
-        ["Milk system", "Fresh + plant (dual)"]
+        ["Supplier", "Kitchen Solutions"],
+        ["Class", "Traditional espresso — not bean-to-cup"],
+        ["Capacity", "120/200 cups/hour (maker)"],
+        ["Milk system", "Fresh — manual steam wands"],
+        ["Price", "£1,875 ex VAT (purchase)"]
       ],
       threat: 5,
-      threatNote: "Two milk systems to clean. Two fridges to stock.",
-      intel: "Serves dairy and plant-milk drinkers without a jug and a prayer. Twice the milk, twice the maintenance.",
-      status: "UNDER REVIEW",
-      details: {
-        "For": ["Inclusive by design", "No manual plant-milk bodging"],
-        "Against": ["Most complex to clean", "More expensive", "Two milk stocks to manage"],
-        "Questions for the supplier": ["Cleaning time for both lines?", "Cross-contamination controls?"]
-      }
-    },
-    {
-      id: "CFN-S01",
-      type: "SUPPLIER",
-      subject: "Supplier A — name TBC",
-      codename: "The Landlord",
-      summary: [
-        ["Model", "Rental, service included"],
-        ["Contract", "Minimum term TBC"]
+      threatNote: "Every drink is made by hand. Needs a separate grinder, trained people and manual cleaning.",
+      intel: "Proper café equipment, handmade in Birmingham, and the only candidate with a published price. It makes the best coffee on the list in skilled hands and the worst in unskilled ones. No grinder is listed, so one must be bought separately.",
+      status: "UNDER REVIEW — CONTESTED",
+      specs: [
+        ["Model", "BAM2E-C"],
+        ["Type", "2-group electronic espresso machine"],
+        ["Rated output", "120/200 cups/hour"],
+        ["Dosing", "Touch pad with pre-programmed measures, override button"],
+        ["Boiler", "4 L"],
+        ["Hot water", "15 L/hour"],
+        ["Milk", "Steam wands for frothing and steaming (manual)"],
+        ["Group height", "120 mm (taller cups)"],
+        ["Grinder", "Not listed — required separately"],
+        ["Power", "2.4 kW, single-phase, 10 A"],
+        ["Size", "W380 × D500 × H535 mm, 35 kg"],
+        ["Build", "Polished 304 stainless steel, rotary brass valves"],
+        ["Warranty", "1 year parts & labour"],
+        ["Price", "£1,875 ex VAT; optional all-inclusive package (delivery, installation, set-up, training)"]
       ],
-      threat: 2,
-      threatNote: "Low upkeep. Watch the small print.",
-      intel: "Predictable monthly cost, engineer included. May insist we buy their beans.",
-      status: "UNDER REVIEW",
       details: {
-        "For": ["No large up-front cost", "Maintenance included", "Replacement if it dies"],
-        "Against": ["Higher total cost over time", "Possible bean lock-in", "Auto-renewal clauses"],
-        "Questions for the supplier": ["Response time in writing?", "Exit terms?", "Annual price increases?"]
-      }
-    },
-    {
-      id: "CFN-S02",
-      type: "SUPPLIER",
-      subject: "Supplier B — name TBC",
-      codename: "The Merchant",
-      summary: [
-        ["Model", "Purchase + optional service"],
-        ["Contract", "Service plan TBC"]
-      ],
-      threat: 3,
-      threatNote: "We own it. We own its problems.",
-      intel: "Buy the machine outright. Cheaper over a long life, as long as someone signs up to the service plan.",
-      status: "UNDER REVIEW",
-      details: {
-        "For": ["Lower long-term cost", "Free choice of beans", "No rental lock-in"],
-        "Against": ["Large up-front spend", "Repairs outside the plan cost extra"],
-        "Questions for the supplier": ["Warranty length?", "Loan machine during repairs?", "Training included?"]
+        "For": [
+          "Lowest known price, published, and ours to own outright",
+          "Highest quality ceiling: real café-style espresso and milk",
+          "Two groups: two people can serve at once",
+          "UK-built, simple, long-lived machinery"
+        ],
+        "Against": [
+          "Not bean-to-cup: conflicts with Objective 01",
+          "Separate grinder needed: extra cost and counter space",
+          "Someone has to make every drink, which is slow at 09:00 unless people are trained",
+          "Manual milk steaming and manual daily cleaning (backflush, wands)",
+          "Only 1-year warranty; servicing arranged separately"
+        ],
+        "Questions for the supplier": [
+          "Price of the all-inclusive package?",
+          "Recommended grinder and its cost?",
+          "Service and maintenance options after year one?",
+          "Water filter requirements for plumbing in?"
+        ]
+      },
+      source: {
+        name: "Kitchen Solutions",
+        url: "https://www.kitchensolutions.co.uk/products/fracino-2-group-espresso-machine-bam2e-c?variant=55569870389624&country=GB&currency=GB",
+        retrieved: "25.09.2026"
       }
     }
   ],

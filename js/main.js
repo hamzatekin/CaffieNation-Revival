@@ -194,6 +194,7 @@
           <p class="dossier__intel">${esc(d.intel)}</p>
           <div class="dossier__foot">
             <span class="stamp">${esc(d.status || 'UNDER REVIEW')}</span>
+            ${d.source ? `<a class="dossier__src" href="${esc(d.source.url)}" target="_blank" rel="noopener noreferrer">SOURCE: ${esc(d.source.name)} <span aria-hidden="true">↗</span></a>` : ''}
             <button class="btn btn--small" type="button" data-dossier="${idx}">ACCESS DOSSIER <span aria-hidden="true">→</span></button>
           </div>
         </div>
@@ -221,8 +222,11 @@
           <div><dt>Threat level</dt><dd>${THREAT[clamp(Math.round(d.threat || 0), 0, 5)] || 'UNKNOWN'} — ${esc(d.threatNote || 'Maintenance complexity')}</dd></div>
           <div><dt>Intelligence</dt><dd>${esc(d.intel)}</dd></div>
         </dl>
+        ${d.specs && d.specs.length ? `<h3>Specifications</h3><dl class="modal__specs">${d.specs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${val(v)}</dd></div>`).join('')}</dl>` : ''}
         ${sections}
-        <p class="modal__foot">Specimen data until verified. Field agents: update <code>js/data.js</code> with confirmed models and quotes.</p>`;
+        <p class="modal__foot">${d.source
+          ? `Source: <a href="${esc(d.source.url)}" target="_blank" rel="noopener noreferrer">${esc(d.source.name)} ↗</a>${d.source.retrieved ? ` — retrieved ${esc(d.source.retrieved)}` : ''}. Manufacturer and retailer claims; verify with the supplier before the vote.`
+          : 'Unverified field intelligence. Update <code>js/data.js</code> with confirmed models and quotes.'}</p>`;
       modal.showModal();
       if (motionOK()) tear();
     });

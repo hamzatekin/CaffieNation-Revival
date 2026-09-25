@@ -924,6 +924,14 @@ span.sig { display: inline-block; }
   margin-top: auto; padding-top: 20px;
 }
 .dossier .stamp { font-size: .92rem; transform: rotate(-3deg); }
+.dossier__src {
+  flex-basis: 100%; order: 3;
+  font: 500 .66rem/1.4 var(--f-mono); letter-spacing: .14em;
+  color: var(--ink-mute); text-decoration: none;
+}
+.dossier__src:hover { color: var(--ink); text-decoration: underline; }
+.modal__specs { margin-top: 0 !important; border-top-width: 1px !important; }
+.modal__foot a { color: inherit; }
 
 /* dossier modal */
 .modal {
