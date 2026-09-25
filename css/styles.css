@@ -899,6 +899,61 @@ span.sig { display: inline-block; }
   position: absolute; right: 10px; top: 8px;
   font: normal 500 .6rem/1 var(--f-mono); letter-spacing: .14em; color: var(--red-ink);
 }
+/* evidence print: product photo taped into the file */
+.print {
+  position: relative;
+  margin: 26px 22px 6px;
+  padding: 9px 9px 0;
+  background: linear-gradient(160deg, #ece5d6, #d9d0bd);
+  transform: rotate(var(--tilt, -1.5deg));
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .25) inset,
+    0 3px 6px rgba(0, 0, 0, .45),
+    0 22px 38px -10px rgba(0, 0, 0, .85);
+  transition: transform .25s;
+}
+.print__img {
+  position: relative; display: block;
+  aspect-ratio: 4 / 3; overflow: hidden;
+  background: #1a1715;
+}
+.print__img img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(.6) sepia(.35) contrast(1.08) brightness(.9);
+  transition: filter .35s;
+}
+.print__img::after { /* print grain, scanlines and edge burn */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, .12) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(20, 12, 6, .45) 100%),
+    var(--grain);
+  background-size: auto, auto, 160px;
+  mix-blend-mode: multiply;
+  opacity: .8;
+}
+.print figcaption {
+  padding: 8px 2px 9px;
+  font: 700 .66rem/1.2 var(--f-type); letter-spacing: .12em; text-transform: uppercase;
+  color: #2a241f;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.print__tape {
+  position: absolute; z-index: 1; top: -12px; left: 50%;
+  width: 92px; height: 24px; margin-left: -46px;
+  background: rgba(214, 204, 178, .55);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+  transform: rotate(calc(var(--tilt, 0deg) * -2.5));
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 2px, #000 2px calc(100% - 2px), transparent calc(100% - 2px));
+  mask-image: linear-gradient(90deg, transparent 0 2px, #000 2px calc(100% - 2px), transparent calc(100% - 2px));
+}
+@media (hover: hover) {
+  .dossier:hover .print { transform: rotate(calc(var(--tilt, 0deg) * .4)) translateY(-2px); }
+  .dossier:hover .print__img img { filter: grayscale(.15) sepia(.12) contrast(1.05) brightness(.98); }
+}
+.print--big { margin: 26px auto 8px; max-width: 460px; }
+.print--big .print__img img { filter: grayscale(.25) sepia(.15) contrast(1.05); }
+
 .dossier__body { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 20px; }
 .dossier__subject { font: 500 .66rem/1 var(--f-mono); letter-spacing: .2em; color: var(--ink-mute); }
 .dossier__name {

@@ -171,6 +171,18 @@
     return `<span class="threat ${n >= 4 ? 'threat--hi' : ''}" aria-hidden="true">${bars}</span>${THREAT[n] || 'UNKNOWN'}`;
   }
 
+  // A product photo presented as a taped-in evidence print.
+  const TILTS = [-1.6, 1.3, -0.9, 1.8, -1.2];
+  function evidencePrint(d, idx, big) {
+    const exhibit = String.fromCharCode(65 + (idx % 26));
+    return `
+      <figure class="print${big ? ' print--big' : ''}" style="--tilt:${TILTS[idx % TILTS.length]}deg">
+        <span class="print__tape" aria-hidden="true"></span>
+        <span class="print__img"><img src="${esc(d.image)}" alt="${esc(d.imageAlt || d.subject)}" loading="lazy" width="960" height="720"></span>
+        <figcaption>EXHIBIT ${exhibit} // ${esc(d.subject)}</figcaption>
+      </figure>`;
+  }
+
   function renderDossiers() {
     const root = $('[data-dossiers]');
     const list = DATA.dossiers || [];
@@ -178,10 +190,11 @@
     root.innerHTML = list.map((d, idx) => `
       <article class="dossier panel reveal" data-type="${esc(d.type || 'FILE')}">
         <header class="dossier__head"><span>DOSSIER <b>${esc(d.id)}</b></span><span>EYES ONLY</span></header>
+        ${d.image ? evidencePrint(d, idx) : `
         <div class="dossier__photo">
-          ${d.image ? `<img src="${esc(d.image)}" alt="${esc(d.subject)}" loading="lazy">` : '<span>NO IMAGE ON FILE</span>'}
+          <span>NO IMAGE ON FILE</span>
           <i>● REC</i>
-        </div>
+        </div>`}
         <div class="dossier__body">
           <p class="dossier__subject">SUBJECT</p>
           <h3 class="dossier__name">${esc(d.subject)}</h3>
@@ -217,6 +230,7 @@
         <h2 class="modal__title" id="modal-title">${esc(d.subject)}</h2>
         ${d.codename ? `<p class="modal__code">Codename: “${esc(d.codename)}”</p>` : ''}
         <span class="stamp">${esc(d.status || 'UNDER REVIEW')}</span>
+        ${d.image ? evidencePrint(d, list.indexOf(d), true) : ''}
         <dl>
           ${(d.summary || []).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${val(v)}</dd></div>`).join('')}
           <div><dt>Threat level</dt><dd>${THREAT[clamp(Math.round(d.threat || 0), 0, 5)] || 'UNKNOWN'} — ${esc(d.threatNote || 'Maintenance complexity')}</dd></div>

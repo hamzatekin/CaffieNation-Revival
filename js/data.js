@@ -336,13 +336,15 @@ window.CFN = {
        specs:   [label, value] rows shown in the full dossier
        details: { heading: [bullets] } shown in the full dossier
        source:  { name, url, retrieved }
-       image:   optional path, e.g. "img/avari-b20.jpg"
+       image:   optional photo path (4:3 works best); imageAlt: its description
      ------------------------------------------------------------------------ */
   dossiers: [
     {
       id: "CFN-D01",
       type: "MACHINE",
       subject: "avari B20",
+      image: "img/avari-b20.jpg",
+      imageAlt: "avari B20 bean-to-cup machine with its milk fridge",
       codename: "The Steady Hand",
       summary: [
         ["Supplier", "rijo42"],
@@ -400,6 +402,8 @@ window.CFN = {
       id: "CFN-D02",
       type: "MACHINE",
       subject: "R42 Touch",
+      image: "img/r42-touch.jpg",
+      imageAlt: "R42 Touch bean-to-cup machine with milk fridge and powder module",
       codename: "The Flagship",
       summary: [
         ["Supplier", "rijo42"],
@@ -460,6 +464,8 @@ window.CFN = {
       id: "CFN-D03",
       type: "MACHINE",
       subject: "Fracino 2-Group",
+      image: "img/fracino-2-group.jpg",
+      imageAlt: "Fracino 2-group stainless steel espresso machine",
       codename: "The Old Guard",
       summary: [
         ["Supplier", "Kitchen Solutions"],
