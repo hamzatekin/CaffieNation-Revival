@@ -565,6 +565,44 @@
         this.all.forEach((s) => this.visible.add(s));
       }
       document.addEventListener('visibilitychange', () => { if (!document.hidden) this.schedule(); });
+
+      // The hero runs its own, escalating loop (see heroTick).
+      const heroEl = $('.hero');
+      this.hero = this.all.filter((s) => heroEl && heroEl.contains(s.el));
+      this.heroSince = 0;
+      if (heroEl && 'IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => {
+          this.heroSince = e.isIntersecting ? (this.heroSince || performance.now()) : 0;
+        }, { threshold: 0.3 }).observe(heroEl);
+      } else {
+        this.heroSince = performance.now();
+      }
+      this.heroSchedule();
+    },
+
+    /* Hero headings: signal decays the longer you watch.
+       ~3.5s between glitches at first, down to ~0.9s after 25s on screen,
+       growing more violent as it goes. Resets when the hero leaves view. */
+    heroSchedule() {
+      clearTimeout(this.heroTimer);
+      const t = this.heroSince ? Math.min(1, (performance.now() - this.heroSince) / 25000) : 0;
+      this.heroTimer = setTimeout(() => this.heroTick(t), (3500 - 2600 * t) * rand(0.7, 1.3));
+    },
+
+    heroTick(t) {
+      if (!this.paused && !document.hidden && motionOK() && this.heroSince && this.hero.length) {
+        const intensity = 1 + 0.7 * t;
+        const s = pick(this.hero.filter((h) => h !== this.heroLast)) || this.hero[0];
+        s.glitch({ intensity });
+        this.heroLast = s;
+        // sometimes the whole picture goes: both lines in quick succession
+        if (Math.random() < 0.15 + 0.3 * t) {
+          const other = this.hero.find((h) => h !== s);
+          if (other) setTimeout(() => other.glitch({ intensity }), rand(40, 140));
+        }
+        if (Math.random() < 0.18 + 0.27 * t) setTimeout(tear, rand(0, 80));
+      }
+      this.heroSchedule();
     },
 
     schedule(min = 4000, max = 12000) {
@@ -574,8 +612,9 @@
 
     tick() {
       if (!this.paused && !document.hidden && motionOK()) {
-        const pool = Array.from(this.visible).filter((s) => s !== this.last);
-        const s = pick(pool.length ? pool : Array.from(this.visible));
+        const rest = Array.from(this.visible).filter((s) => !this.hero.includes(s));
+        const pool = rest.filter((s) => s !== this.last);
+        const s = pick(pool.length ? pool : rest);
         if (s) {
           s.glitch();
           this.last = s;
@@ -675,6 +714,7 @@
       const wasRunning = this.running;
       this.running = false;
       Signal.paused = false;
+      if (Signal.heroSince) Signal.heroSince = performance.now();
 
       if (played && wasRunning && motionOK()) {
         const hero = $('.hero');
