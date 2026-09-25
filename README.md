@@ -70,9 +70,9 @@ To trigger one yourself, run `CFNBroadcast.glitch()` or
 
 ## The opening transmission
 
-It plays on the first visit, then not again for 12 hours. Click, tap or press any key
-to skip it. **REPLAY TRANSMISSION ↺** in the footer, or adding `?intro` to the URL,
-plays it again.
+It plays every time the site is opened (about 3 seconds). Click, tap or press any key
+to skip it. **REPLAY TRANSMISSION ↺** in the footer plays it again without reloading.
+Visitors with reduced motion turned on skip it; `?intro` in the URL forces it anyway.
 
 ## Easter eggs
 

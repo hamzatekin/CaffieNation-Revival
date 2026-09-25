@@ -17,16 +17,14 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <script>
-    /* Decide before first paint whether the opening transmission plays.
-       It plays once, then not again for 12 hours (or add ?intro to force it). */
+    /* The opening transmission plays on every page load (skippable),
+       except for visitors who prefer reduced motion. ?intro forces it. */
     (function () {
       var d = document.documentElement;
       d.classList.add('js');
       var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
       var force = /[?&]intro\b/.test(location.search);
-      var seen = 0;
-      try { seen = +localStorage.getItem('cfn:intro') || 0; } catch (e) {}
-      if (force || (!reduce && Date.now() - seen > 432e5)) d.classList.add('intro-on');
+      if (force || !reduce) d.classList.add('intro-on');
       // Failsafe: never leave the overlay up if the main script fails.
       setTimeout(function () { if (!window.__cfnReady) d.classList.remove('intro-on'); }, 4000);
     })();

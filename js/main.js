@@ -672,7 +672,6 @@
       (this.lineSigs || []).forEach((s) => s.snap());
       html.classList.remove('intro-on');
       if (this.el) this.el.classList.remove('is-log', 'is-burst');
-      try { localStorage.setItem('cfn:intro', String(Date.now())); } catch (e) { /* private mode */ }
       const wasRunning = this.running;
       this.running = false;
       Signal.paused = false;
